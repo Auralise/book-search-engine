@@ -31,7 +31,6 @@ export const typeDefs = gql`
 
 
     type Query {
-        books: [Book]
         user(username: String!): User
     }
 
