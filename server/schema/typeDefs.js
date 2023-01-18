@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-const typeDefs = gql`
+export const typeDefs = gql`
     
     type Book {
         # Local DB ID
@@ -42,5 +42,3 @@ const typeDefs = gql`
         deleteBook(username: String!, bookId: String!): [Book]
     }
 `;
-
-module.exports = typeDefs;
