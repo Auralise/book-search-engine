@@ -14,6 +14,7 @@ const typeDefs = gql`
         title: String!
     }
 
+    # TODO: Potentially remove the password field to avoid exposing password hashes
     type User {
         _id: ID
         username: String!
