@@ -1,4 +1,3 @@
-import typeDefs from './typeDefs';
-import resolvers from './resolvers';
+export { typeDefs } from './typeDefs';
+export { resolvers } from './resolvers';
 
-export { typeDefs, resolvers };
