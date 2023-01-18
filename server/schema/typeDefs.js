@@ -5,13 +5,13 @@ export const typeDefs = gql`
     type Book {
         # Local DB ID
         _id: ID
-        author: [String]
-        description: String!
         # GoogleBooks ID
         bookId: String!
+        title: String!
+        author: [String]
+        description: String!
         image: String
         link: String
-        title: String!
     }
 
     # TODO: Potentially remove the password field to avoid exposing password hashes
