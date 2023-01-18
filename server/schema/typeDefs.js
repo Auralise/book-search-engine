@@ -1,0 +1,45 @@
+import { gql } from "apollo-server-express";
+
+const typeDefs = gql`
+    
+    type Book {
+        # Local DB ID
+        _id: ID
+        author: [String]
+        description: String!
+        # GoogleBooks ID
+        bookId: String!
+        image: String
+        link: String
+        title: String!
+    }
+
+    type User {
+        _id: ID
+        username: String!
+        email: String!
+        password: String!
+        savedBooks: [Book]
+    }
+
+    # TODO: Remove user return from this before deployment to avoid exposing password hashes
+    type Auth {
+        token: ID!
+        user: User
+    }
+
+
+    type Query {
+        books: [Book]
+        user(username: String!): User
+    }
+
+    type Mutation {
+        createUser(email: String!, username: String!, password: String!): User
+        login(email: String!, password: String!): Auth
+        saveBook(username: String!, bookId: String!, description): [Book]
+        deleteBook(username: String!, bookId: String!): [Book]
+    }
+`;
+
+module.exports = typeDefs;
