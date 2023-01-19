@@ -37,7 +37,7 @@ const resolvers = {
         },
 
         login: async (parent, { email, password }) => {
-            const user = User.findOne({ email });
+            const user = await User.findOne({ email });
 
             if (!user) {
                 throw new AuthenticationError("Invalid Credentials");
@@ -59,7 +59,7 @@ const resolvers = {
 
         saveBook: async (parent, { book }, context) => {
             if (context.user) {
-                await User.findOneAndUpdate(
+                const user = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     {
                         $addToSet: {
@@ -78,6 +78,10 @@ const resolvers = {
                         runValidators: true
                     }
                 )
+
+                return user.savedBooks;
+
+
             }
             else {
                 throw new AuthenticationError("You need to be logged in to perform this action");
@@ -86,7 +90,7 @@ const resolvers = {
 
         deleteBook: async (parent, { book }, context) => {
             if (context.User) {
-                await User.findOneAndUpdate(
+                const user = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     {
                         $pull: {
@@ -100,6 +104,8 @@ const resolvers = {
                     }
 
                 );
+
+                return user.savedBooks;
             }
             else {
                 throw new AuthenticationError("You need to be logged in to perform this action");
