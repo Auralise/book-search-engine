@@ -1,8 +1,8 @@
-import { AuthenticationError, ValidationError, UserInputError } from "apollo-server-express";
-import { Book, User } from "../models";
-import { signToken } from "../utils/auth";
+const { AuthenticationError, ValidationError, UserInputError } = require("apollo-server-express");
+const { Book, User } = require("../models");
+const { signToken } = require("../utils/auth");
 
-export const resolvers = {
+const resolvers = {
     Query: {
         getSingleUser: async (parent, { username }, context) => {
             const foundUser = await User.findOne({
@@ -109,3 +109,5 @@ export const resolvers = {
         }
     }
 }
+
+module.exports = resolvers;
